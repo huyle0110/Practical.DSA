@@ -14,8 +14,14 @@ var result = mainClass.TwoPointers2Sum(inputArray, targetNum);
 
 Console.WriteLine(result);
 
-var result2 = mainClass.TwoPointers3SumEqualZero(new int[] { -1, 0, 1, 2, -1, -1 });
-Console.WriteLine(JsonConvert.SerializeObject(result2));
+//var result2 = mainClass.TwoPointers3SumEqualZero(new int[] { -1, 0, 1, 2, -1, -1 });
+//Console.WriteLine(JsonConvert.SerializeObject(result2));
+
+//var result2 = mainClass.MoveZeroToRightArray(new int[] { 2, 0, 4, 0, 9 });
+//var result2 = mainClass.MoveZeroToRightArray(new int[] { 0,1,0,3,12 });
+//Console.WriteLine(JsonConvert.SerializeObject(result2));
+
+mainClass.ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
 
 
 Console.WriteLine("Hello, World!");
@@ -109,18 +115,74 @@ public class TwoPointersFunction
         arrays[j] = temp;
     }
 
+    public void Swap(char[] arrays, int i, int j)
+    {
+        char temp = arrays[i];
+        arrays[i] = arrays[j];
+        arrays[j] = temp;
+    }
+
+    public char[] ReverseString(char[] chars)
+    {
+        int left = 0;
+        int right = chars.Length - 1;
+        while (left < right)
+        {
+            Swap(chars, left, right);
+            left++;
+            right--;
+        }
+
+        return chars;
+    }
+
+    public bool IsHappy(int n)
+    {
+        var charNums = n.ToString().ToList();
+        int total = 0;
+        while (total != 1)
+        {
+
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// </summary>
+    /// <param name="arrays = [2,0,4,0,9]"></param>
+    /// <returns></returns>
     public int[] MoveZeroToRightArray(int[] arrays)
     {
         int length = arrays.Length - 1;
         int i = 0;
-        int j = 0;
-        while (j < length)
-        { 
-             
-
+        int lastNonZero = 0;
+        while (i < length)
+        {
+            if (arrays[i] != 0 && arrays[i + 1] != 0)
+            {
+                lastNonZero = i + 1; 
+            }
+            else if (arrays[i] != 0 && arrays[i+1] == 0) // dont need to swap
+            {
+                lastNonZero = i;
+            }
+            else if (arrays[i] == 0 && arrays[i + 1] != 0)
+            {
+                if (i == 0)
+                {
+                    Swap(arrays, lastNonZero, i + 1);
+                    lastNonZero = i;
+                }
+                else
+                {
+                    Swap(arrays, lastNonZero + 1, i + 1);
+                    lastNonZero = lastNonZero + 1;
+                }
+            }
+            i++;
         }
 
 
-        return new int[0];
+        return arrays;
     }
 }
