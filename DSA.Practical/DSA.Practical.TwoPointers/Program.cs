@@ -55,15 +55,17 @@ public class TwoPointersFunction
     /// Given list of sorted interger, return sum of 3 numbers equal to zero
     /// </summary>
     /// <param name="arrays"></param>
-    /// <param name="targetNum"></param>
     /// <returns></returns>
-    public IList<List<int>> TwoPointers3SumEqualZero(int[] arrays, int targetNum)
+    public IList<List<int>> TwoPointers3SumEqualZero(int[] arrays)
     {
+        Array.Sort(arrays);
         var result = new List<List<int>>();
         var left = 0;
         var right = arrays.Length - 1;
-        for (int i = 0; i < right; i++)
+        for (int i = 0; i < arrays.Length - 2; i++)
         {
+            if (i > 0 && arrays[i] == arrays[i - 1]) // Skip duplicates
+                continue;
             left = i + 1;
             while (left < right)
             {
@@ -71,8 +73,21 @@ public class TwoPointersFunction
                 if (tempSum == 0)
                 {
                     result.Add(new List<int>() { arrays[i], arrays[left], arrays[right] });
+                    //avoid duplicate
+                    while (left < right && arrays[left] == arrays[left + 1])
+                    { 
+                        left++;
+                    }
+
+                    while (left < right && arrays[right] == arrays[right - 1])
+                    {
+                        right--;
+                    }
+
+                    left++;
+                    right--;
                 }
-                if (tempSum < 0)
+                else if (tempSum < 0)
                 {
                     left++;
                 }
@@ -86,6 +101,26 @@ public class TwoPointersFunction
         
         return result;
     }
+
+    public void Swap(int[] arrays, int i, int j)
+    {
+        int temp = arrays[i];
+        arrays[i] = arrays[j];
+        arrays[j] = temp;
+    }
+
+    public int[] MoveZeroToRightArray(int[] arrays)
+    {
+        int length = arrays.Length - 1;
+        int i = 0;
+        int j = 0;
+        while (j < length)
+        { 
+             
+
+        }
+
+
+        return new int[0];
+    }
 }
-
-
